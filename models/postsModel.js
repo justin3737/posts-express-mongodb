@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const todoSchema = new mongoose.Schema(
+const postSchema = new mongoose.Schema(
     {
         title: String,
         //自訂義時間戳記
@@ -21,6 +21,6 @@ const todoSchema = new mongoose.Schema(
     }
 )
 
-const Todo = mongoose.model('Todo', todoSchema);
+const Post = mongoose.model('Post', postSchema);
 
-module.exports = Todo;
+module.exports = Post;

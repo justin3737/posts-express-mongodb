@@ -1,22 +1,22 @@
 var express = require('express');
 var router = express.Router();
-const Todos = require("../models/todosModel");
+const Post = require("../models/postsModel");
 
 router.get('/', async function(req, res) {
-  const data = await Todos.find({});
+  const data = await Post.find({});
   res.json(data);
 });
 
 router.post('/', function(req, res) {
   const { title } = req.body
-  Todos.create({
+  Post.create({
     title
   });
   res.json(req.body)
 });
 
 router.delete('/', function(req, res) {
-  Todos.deleteMany({}, function(err, data) {
+  Post.deleteMany({}, function(err, data) {
     if (err) {
       res.json(err);
     } else {
@@ -27,7 +27,7 @@ router.delete('/', function(req, res) {
 
 router.delete('/:id', function(req, res) {
   const { id } = req.params;
-  Todos.deleteOne({_id: id}, function(err, data) {
+  Post.deleteOne({_id: id}, function(err, data) {
     if (err) {
       res.json(err);
     } else {
@@ -39,7 +39,7 @@ router.delete('/:id', function(req, res) {
 router.patch('/:id', function(req, res) {
   const { id } = req.params;
   const { title } = req.body;
-  Todos.findByIdAndUpdate(id, { title }, function(err, data) {
+  Post.findByIdAndUpdate(id, { title }, function(err, data) {
     if (err) {
       res.json(err);
     }else {
