@@ -7,7 +7,7 @@ dotenv.config({
 
 function init(){
   // 本地連線
-  mongoose.connect('mongodb://localhost:27017/todos1')
+  mongoose.connect('mongodb://localhost:27017/posts')
     .then(() => {console.log('資料庫連線成功')})
     .catch(err => {console.log('資料庫連線失敗', err)});
 
