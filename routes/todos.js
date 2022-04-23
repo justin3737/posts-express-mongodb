@@ -4,7 +4,6 @@ const Todos = require("../models/todosModel");
 
 router.get('/', async function(req, res) {
   const data = await Todos.find({});
-  console.log(data);
   res.json(data);
 });
 
@@ -14,6 +13,27 @@ router.post('/', function(req, res) {
     title
   });
   res.json(req.body)
+});
+
+router.delete('/', function(req, res) {
+  Todos.deleteMany({}, function(err, data) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(data);
+    }
+  });
+});
+
+router.delete('/:id', function(req, res) {
+  const {id} = req.params;
+  Todos.deleteOne({_id: id}, function(err, data) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(data);
+    }
+  });
 });
 
 module.exports = router;
