@@ -26,7 +26,7 @@ router.delete('/', function(req, res) {
 });
 
 router.delete('/:id', function(req, res) {
-  const {id} = req.params;
+  const { id } = req.params;
   Todos.deleteOne({_id: id}, function(err, data) {
     if (err) {
       res.json(err);
@@ -34,6 +34,19 @@ router.delete('/:id', function(req, res) {
       res.json(data);
     }
   });
+});
+
+router.patch('/:id', function(req, res) {
+  const { id } = req.params;
+  const { title } = req.body;
+  Todos.findByIdAndUpdate(id, { title }, function(err, data) {
+    if (err) {
+      res.json(err);
+    }else {
+      res.json(data);
+    }
+  });
+
 });
 
 module.exports = router;
