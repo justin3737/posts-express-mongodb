@@ -1,52 +1,15 @@
 var express = require('express');
 var router = express.Router();
-const Post = require("../models/postsModel");
+const PostController = require('../controllers/posts');
 
-router.get('/', async function(req, res) {
-  const data = await Post.find({});
-  res.json(data);
-});
+router.get('/', PostController.getPosts);
 
-router.post('/', function(req, res) {
-  const { title } = req.body
-  Post.create({
-    title
-  });
-  res.json(req.body)
-});
+router.post('/', PostController.createPosts);
 
-router.delete('/', function(req, res) {
-  Post.deleteMany({}, function(err, data) {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(data);
-    }
-  });
-});
+router.delete('/', PostController.deletePosts);
 
-router.delete('/:id', function(req, res) {
-  const { id } = req.params;
-  Post.deleteOne({_id: id}, function(err, data) {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(data);
-    }
-  });
-});
+router.delete('/:id', PostController.deleteOnePosts);
 
-router.patch('/:id', function(req, res) {
-  const { id } = req.params;
-  const { title } = req.body;
-  Post.findByIdAndUpdate(id, { title }, function(err, data) {
-    if (err) {
-      res.json(err);
-    }else {
-      res.json(data);
-    }
-  });
-
-});
+router.patch('/:id', PostController.updatePosts);
 
 module.exports = router;
